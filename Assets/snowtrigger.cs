@@ -1,0 +1,50 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class snowtrigger : MonoBehaviour
+{
+	StarterAssets.ThirdPersonController tpc;
+	public GameObject Player;
+	private void Start()
+	{
+		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
+	}
+	private void Update()
+	{
+		if (tpc.cold >= 10)
+		{
+			CancelInvoke("heatconter");
+		}
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Player"))
+		{
+			InvokeRepeating("heatconter", 0, 1);
+			InvokeRepeating("Reducrspeed", 0, 1);
+		}
+	}
+	void Reducrspeed()
+	{
+		if (tpc.PlayerState > 1)
+		{
+			tpc.PlayerState--;
+
+
+		}
+	}
+	public void heatconter()
+	{
+		
+
+		if (tpc.cold>=0)
+		{
+			
+			tpc.cold++;
+
+		}
+		
+	}
+}
