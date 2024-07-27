@@ -29,7 +29,7 @@ public class snowtrigger : MonoBehaviour
 		if (collision.gameObject.CompareTag("Player"))
 		{
 			InvokeRepeating("heatconter", 0, 1);
-			InvokeRepeating("Reducrspeed", 0, 4);
+			InvokeRepeating("Reducrspeed", 0, 7);
 		}
 
 	}
