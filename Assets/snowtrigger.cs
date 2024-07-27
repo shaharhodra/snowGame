@@ -12,10 +12,16 @@ public class snowtrigger : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (tpc.cold >= 10)
+		if (tpc.cold==10)
 		{
 			CancelInvoke("heatconter");
 		}
+		if (tpc.PlayerState==1)
+		{
+
+			CancelInvoke("Reducrspeed");
+		}
+
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -23,9 +29,11 @@ public class snowtrigger : MonoBehaviour
 		if (collision.gameObject.CompareTag("Player"))
 		{
 			InvokeRepeating("heatconter", 0, 1);
-			InvokeRepeating("Reducrspeed", 0, 1);
+			InvokeRepeating("Reducrspeed", 0, 4);
 		}
+
 	}
+	
 	void Reducrspeed()
 	{
 		if (tpc.PlayerState > 1)
@@ -39,7 +47,7 @@ public class snowtrigger : MonoBehaviour
 	{
 		
 
-		if (tpc.cold>=0)
+		if (tpc.cold<10)
 		{
 			
 			tpc.cold++;

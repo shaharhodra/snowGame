@@ -114,7 +114,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        public bool iscold ;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -139,7 +139,7 @@ namespace StarterAssets
 
         private void Start()
         {
-            
+            iscold = true;
             PlayerState = 1;
             cold = 10;
             //לשנות ל .. מרגע הנגיע 
@@ -443,7 +443,7 @@ namespace StarterAssets
 		}
 		void Reducrspeed()
 		{
-			if (PlayerState > 1)
+			if (PlayerState > 1&&iscold)
 			{
 				PlayerState--;
 
@@ -452,7 +452,7 @@ namespace StarterAssets
 		}
         public void heatconter()
         {
-			if (cold<10)
+			if (cold<10&&iscold)
 			{
                 cold++;
 
