@@ -37,15 +37,19 @@ public class GM : MonoBehaviour
 	}
 	public void shack()
 	{
+		tpc._animator.SetBool("warming",true);
+
 		tpc.iscold = false;
 		InvokeRepeating("heatconter", 0, 2);
-
+		tpc.MoveSpeed = 0f;
+		//stop moving bool
+		//tpc.move = false;
 		InvokeRepeating("coldCounter", 0, 2);
 	}
 	public void GoOut()
 	{
 		tpc.iscold = true;
-
+		tpc._animator.SetBool("warming", false);
 		CancelInvoke("heatconter");
 		CancelInvoke("coldCounter");
 	}

@@ -10,11 +10,15 @@ public class GameManeger : MonoBehaviour
   //  [SerializeField] GameObject Player;
    // int appelCount=0;
     //public int coldCount=0;
-    public GM gm;
-    // Start is called before the first frame update
-    void Start()
+     GM gm;
+	StarterAssets.ThirdPersonController tpc;
+	[SerializeField] GameObject Player;
+
+
+	// Start is called before the first frame update
+	void Start()
     {
-      //  tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
+       tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
        gm= GameObject.FindObjectOfType<GM>();
     }
 
@@ -49,9 +53,10 @@ public class GameManeger : MonoBehaviour
 		if (other.gameObject.CompareTag("shack"))
 		{
 			gm.shack();
+			//tpc._animator.SetTrigger("warming");
 			//tpc.iscold = false;
 			//InvokeRepeating("heatconter", 0, 2);
-
+			
 			//InvokeRepeating("coldCounter", 0, 2);
 		}
 
@@ -60,6 +65,7 @@ public class GameManeger : MonoBehaviour
 
 
 	}
+
 
 	private void OnTriggerExit(Collider other)
 	{
