@@ -4,17 +4,22 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Cross_Tree_C_01
-  m_Shader: {fileID: 4800000, guid: 76c9ec5550cc074499b49e6440c59ae7, type: 3}
-  m_ShaderKeywords: _ENABLEWIND_ON _LOD_FADE_CROSSFADE_ON _WORLDPROJECTION_ON
-  m_LightmapFlags: 5
+  m_Shader: {fileID: 4800000, guid: 2e05b6c8581457647bca0123695c8bc4, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _ENABLEWIND_ON _LOD_FADE_CROSSFADE_ON _WORLDPROJECTION_ON
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    MotionVector: User
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -103,6 +108,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
+    - _AlphaCutoffEnable: 1
+    - _AlphaDstBlend: 0
+    - _AlphaSrcBlend: 1
     - _Amp: 0.78
     - _Ampl: 4.21
     - _BackFaceSnow: 0
@@ -111,13 +120,19 @@ Material:
     - _BaseNormalIntensity: 1
     - _BaseSmoothness: 1
     - _BaseTreeAO: 0.5
+    - _BlendMode: 0
     - _BumpScale: 1
     - _CamMax: 230.36
     - _CamMin: 0
     - _Contrastaa: 60
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DoubleSidedEnable: 0
+    - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _EnableFogOnTransparent: 1
     - _EnableWind: 1
     - _EnableWorldProjection: 0
     - _Float0: 0
@@ -145,13 +160,28 @@ Material:
     - _Opacity: 0.64
     - _PETE: 0
     - _Parallax: 0.02
+    - _ReceivesSSR: 1
+    - _RenderQueueType: 1
+    - _RequireSplitLighting: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 1
     - _SrcBlend: 1
+    - _StencilRef: 0
+    - _StencilRefDepth: 8
+    - _StencilRefDistortionVec: 4
+    - _StencilRefGBuffer: 10
+    - _StencilRefMV: 40
+    - _StencilWriteMask: 6
+    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDistortionVec: 4
+    - _StencilWriteMaskGBuffer: 14
+    - _StencilWriteMaskMV: 40
+    - _SurfaceType: 0
     - _TTTT: 13.75
     - _TestOffset: 0
     - _TestTime: 1
+    - _Thickness1: 0.517
     - _TintNoiseContrast: 20
     - _TintNoiseTile: 10
     - _TintNoiseTileX: 6
@@ -160,7 +190,7 @@ Material:
     - _TopInt: 2.58
     - _TopIntensity: 1
     - _TopNormalIntensity: 1.044
-    - _TopOffset: 0.7
+    - _TopOffset: 0.75
     - _TopSmoothness: 1
     - _TopUVScale: 1
     - _TransAmbient: 0.2
@@ -172,7 +202,12 @@ Material:
     - _Transmission: 10
     - _TransmissionDistance: 300
     - _TransmissionIntensity: 0
+    - _TransparentBackfaceEnable: 0
+    - _TransparentCullMode: 2
+    - _TransparentSortPriority: 0
+    - _TransparentZWrite: 1
     - _UVSec: 0
+    - _UseShadowThreshold: 0
     - _VertexPosition: 0.37
     - _Wind: 0
     - _WindAmplitude: 1
@@ -184,6 +219,9 @@ Material:
     - _WindTreeScale: 0.5
     - _WorldProjection: 1
     - _Y: -0.28
+    - _ZTestDepthEqualForOpaque: 3
+    - _ZTestGBuffer: 3
+    - _ZTestTransparent: 4
     - _ZWrite: 1
     - __dirty: 0
     - _a: 1.7
@@ -194,8 +232,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 1, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor1: {r: 1, g: 1, b: 1, a: 0}
     - _TintColor2: {r: 0.8014706, g: 0.8014706, b: 0.8014706, a: 0}
-    - _TopColor: {r: 0.9191176, g: 0.9191176, b: 0.9191176, a: 0}
+    - _TopColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 0}
     - _Vector0: {r: 1, g: 1, b: 1, a: 0}
+  m_BuildTextureStacks: []
