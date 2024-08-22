@@ -217,7 +217,7 @@ Material:
     - _Surafce: 0
     - _SurfaceType: 0
     - _Thickness: 1
-    - _Thickness1: 1
+    - _Thickness1: 0
     - _TintNoiseContrast: 10
     - _TintNoiseTile: 10
     - _TintNoiseTileX: 10
@@ -261,8 +261,7 @@ Material:
     - _BottomColor: {r: 0.5147059, g: 0.5147059, b: 0.5147059, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 0.22794116, g: 0.22794116, b: 0.22794116, a: 0}
-    - _DiffusionProfile_asset: {r: 2.0016022e+10, g: -7.1593385e+31, b: 464481570,
-        a: 6.910256e-17}
+    - _DiffusionProfile_asset: {r: 2.0016022e+10, g: -7.1593385e+31, b: 464481570, a: 6.910256e-17}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _LocalDirection: {r: 0, g: 0, b: 1, a: 0}

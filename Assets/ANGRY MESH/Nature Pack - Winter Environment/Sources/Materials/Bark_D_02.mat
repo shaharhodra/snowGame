@@ -212,7 +212,7 @@ Material:
     - _WindMultiplier: 1
     - _WindTreeIntensity: 1
     - _WindTreeStiffness: 1
-    - _WindTrunkAmplitude: 1
+    - _WindTrunkAmplitude: 0.96
     - _WindTrunkStiffness: 1
     - _WindVariation: 0
     - _ZTestDepthEqualForOpaque: 3

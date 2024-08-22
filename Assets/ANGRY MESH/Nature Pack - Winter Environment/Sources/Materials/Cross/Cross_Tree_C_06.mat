@@ -210,7 +210,7 @@ Material:
     - _TTTT: 13.75
     - _TestOffset: 0
     - _TestTime: 1
-    - _Thickness1: 0.517
+    - _Thickness1: 0
     - _TintNoiseContrast: 20
     - _TintNoiseTile: 10
     - _TintNoiseTileX: 6

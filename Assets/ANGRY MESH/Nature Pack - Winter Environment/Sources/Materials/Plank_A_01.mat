@@ -150,15 +150,15 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BackFaceSnow: 0
-    - _BaseAOIntensity: 0.438
+    - _BaseAOIntensity: 0.517
     - _BaseBarkAO: 1
     - _BaseBranchAO: 1
     - _BaseNormalIntensity: 0.5
     - _BaseNormalMapIntensity: 1
-    - _BaseSmoothness: 0.5
+    - _BaseSmoothness: 0
     - _BaseTreeAO: 0
     - _BlendMode: 0
-    - _BumpScale: 1
+    - _BumpScale: 0.64
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5

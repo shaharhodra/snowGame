@@ -236,7 +236,7 @@ Material:
     - _TessValue: 8.6
     - _TestOffset: 0
     - _TestTime: 1
-    - _Thickness: 0.2
+    - _Thickness: 0
     - _TintNoiseContrast: 20
     - _TintNoiseTile: 10
     - _TintNoiseTileX: 10
@@ -313,8 +313,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 1, g: 0, b: 0, a: 0}
-    - _DiffusionProfile_asset: {r: 8.828529e-15, g: -1.3423827e-26, b: 6.2575994e-23,
-        a: 2.1953398e+11}
+    - _DiffusionProfile_asset: {r: 8.828529e-15, g: -1.3423827e-26, b: 6.2575994e-23, a: 2.1953398e+11}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseMapPannerSpeed: {r: 0, g: 0, b: 0, a: 0}
