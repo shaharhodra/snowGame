@@ -28,7 +28,7 @@ public class GM : MonoBehaviour
 	public void apple()
 	{
 		appelCount++;
-		if (tpc.PlayerState <= 4 && appelCount == 2)
+		if (tpc.PlayerState < 4 && appelCount == 2)
 		{
 			tpc.cold--;
 			tpc.PlayerState++;
@@ -40,11 +40,11 @@ public class GM : MonoBehaviour
 		tpc._animator.SetBool("warming",true);
 
 		tpc.iscold = false;
-		InvokeRepeating("heatconter", 0, 2);
+		InvokeRepeating("heatconter", 0, .5f);
 		tpc.MoveSpeed = 0f;
 		//stop moving bool
 		//tpc.move = false;
-		InvokeRepeating("coldCounter", 0, 2);
+		InvokeRepeating("coldCounter", 0, 3);
 	}
 	public void GoOut()
 	{

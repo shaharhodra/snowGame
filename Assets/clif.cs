@@ -5,20 +5,35 @@ using UnityEngine;
 public class clif : MonoBehaviour
 {
 	[SerializeField] GameObject player;
-	
+	[SerializeField]Transform snowpos;
 	[SerializeField]Transform newpos;
+	StarterAssets.ThirdPersonController tpc;
 
+	//[SerializeField] GameObject snowfall;
+	//[SerializeField] GameObject box;
 	private void Start()
 	{
-		
+		tpc = player.GetComponent<StarterAssets.ThirdPersonController>();
+
 	}
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			player.SetActive(false);
-			player.transform.position = newpos.position;
-			player.SetActive(true);
+			Invoke("PlayerSetActive",3);
+			this.transform.position = snowpos.position;
+			this.GetComponent<Rigidbody>().isKinematic = true;
+			tpc._animator.SetBool("dead", true);
+			tpc.move = false;
+			
 		}
+	}
+	void PlayerSetActive()
+	{
+		player.SetActive(false);
+		player.transform.position = newpos.position;
+		player.SetActive(true);
+		tpc._animator.SetBool("dead", false);
+		tpc.move = true;
 	}
 }

@@ -75,7 +75,7 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-
+        
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -94,7 +94,8 @@ namespace StarterAssets
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
-
+        public bool slde;
+        public bool onCliff;
         // animation IDs
         private int _animIDSpeed;
         private int _animIDGrounded;
@@ -140,6 +141,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            slde = false;
+            onCliff = true;
             move = true;
             iscold = true;
             PlayerState = 1;
@@ -147,7 +150,7 @@ namespace StarterAssets
             //לשנות ל .. מרגע הנגיע 
             InvokeRepeating("heatconter", 0f, 20);
             // reduc speed every x time
-            InvokeRepeating("Reducrspeed", 0f, 30);
+            InvokeRepeating("Reducrspeed", 0f, 120);
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -174,36 +177,85 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            slider.value = MoveSpeed;
+            slider.value = PlayerState;
             sliderheat.value = cold;
-
+           
             if (PlayerState == 1)
             {
-                MoveSpeed = 1;
-                _animator.SetInteger(_animIdAnimationspeed, 0);
+				if (slde==false)
+				{
+                    MoveSpeed = 1;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 0);
+                }
+				if(slde==true)
+				{
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+				}
+               
+
             }
             if (PlayerState == 2)
             {
-                MoveSpeed = 2;
-                _animator.SetInteger(_animIdAnimationspeed, 1);
+				if (slde==false)
+				{
+                    MoveSpeed = 2;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 1);
+                }
+               if(slde==true)
+                {
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
+
             }
             if (PlayerState == 3)
             {
+				if (slde==false)
+				{
+                    MoveSpeed = 3;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 2);
+                }
+                if(slde==true)
+                {
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
 
-                MoveSpeed = 3;
-                _animator.SetInteger(_animIdAnimationspeed, 2);
             }
 			if (PlayerState == 4)
 			{
-                MoveSpeed = 5;
+				if (slde==false)
+				{
+                    MoveSpeed = 4;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 3);
+                    JumpHeight = 2;
+                }
+				
 
-				_animator.SetInteger(_animIdAnimationspeed, 3);
-                JumpHeight = 2;
-			}
-			else
-			{
-                JumpHeight = 1.2F;
-			}
+				if (slde==true)
+                {
+                    MoveSpeed =5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
+
+
+            }
+			
+
+			
 			if (cold == 10)
 			{
 
@@ -227,7 +279,7 @@ namespace StarterAssets
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIdAnimationspeed = Animator.StringToHash("animation");
         }
-
+       
         private void GroundedCheck()
         {
             // set sphere position, with offset
@@ -242,6 +294,7 @@ namespace StarterAssets
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
         }
+
 
         private void CameraRotation()
         {
@@ -306,13 +359,21 @@ namespace StarterAssets
 
                 // normalise input direction
                 Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
+                Vector2 input2dderection = new Vector2(0, 0); 
                 // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
                 // if there is a move input rotate player when the player is moving
                 if (_input.move != Vector2.zero)
                 {
-                    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                      _mainCamera.transform.eulerAngles.y;
+					if (onCliff==true)
+					{
+                        _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+                    }
+					if (onCliff==false)
+					{
+                       _targetRotation=input2dderection.x ;
+					}
+                  
+                     
                     float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                         RotationSmoothTime);
 

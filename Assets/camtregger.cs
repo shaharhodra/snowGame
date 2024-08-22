@@ -7,19 +7,33 @@ public class camtregger : MonoBehaviour
 {
     [SerializeField] CinemachineFreeLook cam;
 	// Start is called before the first frame update
-
+	GameObject Player;
+	StarterAssets.ThirdPersonController tpc;
+	public float moveSpeed = 5.0f;
+	public float jumpForce = 8.0f;
+	Rigidbody rb;
+	private void Start()
+	{
+		Player = GameObject.Find("PlayerArmature");
+		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
+	
+	}
 	
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
 			cam.Priority = 11;
-
+			tpc.onCliff = false;
 		}
 	}
 	private void OnTriggerExit(Collider other)
 	{
-		cam.Priority = 1;
+		if (other.CompareTag("Player"))
+		{
+			cam.Priority = 1;
+			tpc.onCliff = true;
+		}
 	}
 
 }
