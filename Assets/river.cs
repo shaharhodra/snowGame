@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class river : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+      GameObject player;
     [SerializeField] Transform newpos;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("PlayerArmature");
     }
 
     // Update is called once per frame

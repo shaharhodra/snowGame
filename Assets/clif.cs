@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class clif : MonoBehaviour
 {
-	[SerializeField] GameObject player;
-	[SerializeField]Transform snowpos;
-	[SerializeField]Transform newpos;
+	GameObject player;
+	Transform snowpos;
+	Transform newpos;
 	StarterAssets.ThirdPersonController tpc;
 
 	//[SerializeField] GameObject snowfall;
 	//[SerializeField] GameObject box;
 	private void Start()
 	{
+		snowpos = GameObject.Find("snowpos").GetComponent<Transform>();
+		newpos = GameObject.Find("startPos").GetComponent<Transform>();
+		player = GameObject.Find("PlayerArmature");
 		tpc = player.GetComponent<StarterAssets.ThirdPersonController>();
 
 	}

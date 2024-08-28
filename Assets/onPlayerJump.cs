@@ -5,11 +5,12 @@ using UnityEngine;
 public class onPlayerJump : MonoBehaviour
 {
     GameObject Player;
-    [SerializeField] Transform newpos;
+    Transform newpos;
 
     // Start is called before the first frame update
     void Start()
     {
+        newpos = GameObject.Find("riverpos").GetComponentInChildren<Transform>();
         Player = GameObject.Find("PlayerArmature");
     }
 

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class falldown : MonoBehaviour
 {
-	[SerializeField] GameObject player;
-	[SerializeField] Transform snowpos;
-	[SerializeField] Transform newpos;
+   GameObject player;
+     Transform snowpos;
+	 Transform newpos;
 	StarterAssets.ThirdPersonController tpc;
+	 GameObject fallsnow;
 
 	
 	private void Start()
 	{
+		fallsnow = GameObject.Find("fallSnow");
+		snowpos = GameObject.Find("snowpos").GetComponent<Transform>();
+		newpos = GameObject.Find("startPos").GetComponent<Transform>();
+		player = GameObject.Find("PlayerArmature");
 		tpc = player.GetComponent<StarterAssets.ThirdPersonController>();
 
 	}
@@ -20,7 +25,8 @@ public class falldown : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			Invoke("PlayerSetActive", 3);
-			this.transform.position = snowpos.position;
+			fallsnow.transform.position = snowpos.position;
+			fallsnow.GetComponent<Rigidbody>().isKinematic = true;
 			tpc._animator.SetBool("dead", true);
 			tpc.move = false;
 

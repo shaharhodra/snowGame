@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -79,9 +79,9 @@ namespace StarterAssets
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
-        //slider
-        public Slider slider;
-        public Slider sliderheat;
+        //energy
+         Slider energy;
+         Slider coldSlider;
         public int cold;
         // player
         private float _speed;
@@ -103,7 +103,7 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
         private int _animIdAnimationspeed;
-
+        Canvas can;
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
@@ -141,6 +141,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            energy = GameObject.Find("energy").GetComponentInChildren<Slider>();
+            coldSlider = GameObject.Find("cold").GetComponentInChildren<Slider>();
             slde = false;
             onCliff = true;
             move = true;
@@ -177,8 +179,8 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            slider.value = PlayerState;
-            sliderheat.value = cold;
+            energy.value = PlayerState;
+            coldSlider.value = cold;
            
             if (PlayerState == 1)
             {

@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class camtregger : MonoBehaviour
 {
-    [SerializeField] CinemachineFreeLook cam;
+     CinemachineFreeLook cam;
 	// Start is called before the first frame update
 	GameObject Player;
 	StarterAssets.ThirdPersonController tpc;
@@ -14,6 +14,7 @@ public class camtregger : MonoBehaviour
 	Rigidbody rb;
 	private void Start()
 	{
+		cam = GameObject.Find("FreeLook Camera").GetComponentInChildren<CinemachineFreeLook>();
 		Player = GameObject.Find("PlayerArmature");
 		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
 	
