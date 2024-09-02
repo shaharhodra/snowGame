@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c509dbaa7b6f416409e3195321a2187e, type: 3}
+  m_Name: Snow Palette
+  m_EditorClassIdentifier: 
+  PaletteLayers:
+  - {fileID: 8574412962073106934, guid: f848f659c49738f44b987b447ddadd9b, type: 2}
+  - {fileID: 8574412962073106934, guid: 39ce3363f8375784995d615671d35307, type: 2}
+  - {fileID: 8574412962073106934, guid: 2a4876d22985fbb4ba27ace2fefe8e71, type: 2}
+  - {fileID: 8574412962073106934, guid: e55a774aeec55d64fbf706fb590cc358, type: 2}
