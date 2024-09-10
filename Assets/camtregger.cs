@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class camtregger : MonoBehaviour
 {
-     CinemachineFreeLook cam;
+	CinemachineVirtualCamera Vcam;
 	// Start is called before the first frame update
 	GameObject Player;
 	StarterAssets.ThirdPersonController tpc;
@@ -14,7 +14,7 @@ public class camtregger : MonoBehaviour
 	Rigidbody rb;
 	private void Start()
 	{
-		cam = GameObject.Find("FreeLook Camera").GetComponentInChildren<CinemachineFreeLook>();
+		Vcam = GameObject.Find("Virtual Camera p").GetComponentInChildren<CinemachineVirtualCamera>();
 		Player = GameObject.Find("PlayerArmature");
 		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
 	
@@ -24,7 +24,8 @@ public class camtregger : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			cam.Priority = 11;
+			//cam.Priority = 11;
+			Vcam.Priority = 11;
 			tpc.onCliff = false;
 		}
 	}
@@ -32,7 +33,9 @@ public class camtregger : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			cam.Priority = 1;
+			//cam.Priority = 1;
+			Vcam.Priority = 1;
+
 			tpc.onCliff = true;
 		}
 	}

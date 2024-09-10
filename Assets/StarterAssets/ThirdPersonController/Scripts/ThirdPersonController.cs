@@ -80,8 +80,8 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         //energy
-         Slider energy;
-         Slider coldSlider;
+        [SerializeField] Slider energy;
+       [SerializeField]  Slider coldSlider;
         public int cold;
         // player
         private float _speed;
@@ -141,8 +141,8 @@ namespace StarterAssets
 
         private void Start()
         {
-            energy = GameObject.Find("energy").GetComponentInChildren<Slider>();
-            coldSlider = GameObject.Find("cold").GetComponentInChildren<Slider>();
+           // energy = GameObject.Find("energy").GetComponentInChildren<Slider>();
+           // coldSlider = GameObject.Find("cold").GetComponentInChildren<Slider>();
             slde = false;
             onCliff = true;
             move = true;
@@ -152,7 +152,7 @@ namespace StarterAssets
             //לשנות ל .. מרגע הנגיע 
             InvokeRepeating("heatconter", 0f, 20);
             // reduc speed every x time
-            InvokeRepeating("Reducrspeed", 0f, 120);
+            InvokeRepeating("Reducrspeed", 0f, 50);
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -186,7 +186,7 @@ namespace StarterAssets
             {
 				if (slde==false)
 				{
-                    MoveSpeed = 1;
+                    MoveSpeed =1f;
                     JumpHeight = 1.2f;
                     Gravity = -15;
                     _animator.SetInteger(_animIdAnimationspeed, 0);
@@ -204,7 +204,7 @@ namespace StarterAssets
             {
 				if (slde==false)
 				{
-                    MoveSpeed = 2;
+                    MoveSpeed = 1.2f;
                     JumpHeight = 1.2f;
                     Gravity = -15;
                     _animator.SetInteger(_animIdAnimationspeed, 1);
@@ -403,7 +403,7 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
-            if (Grounded)
+            if (Grounded&&PlayerState!=1)
             {
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;

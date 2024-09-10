@@ -30,6 +30,7 @@ public class falldown : MonoBehaviour
 			tpc._animator.SetBool("dead", true);
 			tpc.move = false;
 
+
 		}
 	}
 	void PlayerSetActive()
