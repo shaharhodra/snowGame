@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -75,13 +75,13 @@ namespace StarterAssets
 
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
-
+        
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
-        //slider
-        public Slider slider;
-        public Slider sliderheat;
+        //energy
+        [SerializeField] Slider energy;
+       [SerializeField]  Slider coldSlider;
         public int cold;
         // player
         private float _speed;
@@ -94,7 +94,8 @@ namespace StarterAssets
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
-
+        public bool slde;
+        public bool onCliff;
         // animation IDs
         private int _animIDSpeed;
         private int _animIDGrounded;
@@ -102,19 +103,19 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
         private int _animIdAnimationspeed;
-
+        Canvas can;
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
-        private Animator _animator;
+        public Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
-
+        public bool move;
         private bool _hasAnimator;
-
+        public bool iscold ;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -130,6 +131,7 @@ namespace StarterAssets
 
         private void Awake()
         {
+            
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -139,13 +141,18 @@ namespace StarterAssets
 
         private void Start()
         {
-            
+           // energy = GameObject.Find("energy").GetComponentInChildren<Slider>();
+           // coldSlider = GameObject.Find("cold").GetComponentInChildren<Slider>();
+            slde = false;
+            onCliff = true;
+            move = true;
+            iscold = true;
             PlayerState = 1;
             cold = 10;
             //לשנות ל .. מרגע הנגיע 
             InvokeRepeating("heatconter", 0f, 20);
             // reduc speed every x time
-            InvokeRepeating("Reducrspeed", 0f, 30);
+            InvokeRepeating("Reducrspeed", 0f, 50);
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -172,36 +179,85 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            slider.value = MoveSpeed;
-            sliderheat.value = cold;
-
+            energy.value = PlayerState;
+            coldSlider.value = cold;
+           
             if (PlayerState == 1)
             {
-                MoveSpeed = 1;
-                _animator.SetInteger(_animIdAnimationspeed, 0);
+				if (slde==false)
+				{
+                    MoveSpeed =1f;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 0);
+                }
+				if(slde==true)
+				{
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+				}
+               
+
             }
             if (PlayerState == 2)
             {
-                MoveSpeed = 2;
-                _animator.SetInteger(_animIdAnimationspeed, 1);
+				if (slde==false)
+				{
+                    MoveSpeed = 1.2f;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 1);
+                }
+               if(slde==true)
+                {
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
+
             }
             if (PlayerState == 3)
             {
+				if (slde==false)
+				{
+                    MoveSpeed = 3;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 2);
+                }
+                if(slde==true)
+                {
+                    MoveSpeed = 5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
 
-                MoveSpeed = 3;
-                _animator.SetInteger(_animIdAnimationspeed, 2);
             }
 			if (PlayerState == 4)
 			{
-                MoveSpeed = 5;
+				if (slde==false)
+				{
+                    MoveSpeed = 4;
+                    JumpHeight = 1.2f;
+                    Gravity = -15;
+                    _animator.SetInteger(_animIdAnimationspeed, 3);
+                    JumpHeight = 2;
+                }
+				
 
-				_animator.SetInteger(_animIdAnimationspeed, 3);
-                JumpHeight = 2;
-			}
-			else
-			{
-                JumpHeight = 1.2F;
-			}
+				if (slde==true)
+                {
+                    MoveSpeed =5;
+                    JumpHeight = 2;
+                    Gravity = -15;
+                }
+
+
+            }
+			
+
+			
 			if (cold == 10)
 			{
 
@@ -225,7 +281,7 @@ namespace StarterAssets
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
             _animIdAnimationspeed = Animator.StringToHash("animation");
         }
-
+       
         private void GroundedCheck()
         {
             // set sphere position, with offset
@@ -240,6 +296,7 @@ namespace StarterAssets
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
         }
+
 
         private void CameraRotation()
         {
@@ -264,77 +321,89 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			if (move)
+			{
+                // set target speed based on move speed, sprint speed and if sprint is pressed
+                float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
-            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+                // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
-            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+                // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+                // if there is no input, set the target speed to 0
+                if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
-            // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+                // a reference to the players current horizontal velocity
+                float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
-            float speedOffset = 0.1f;
-            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+                float speedOffset = 0.1f;
+                float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-            // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
-            {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * SpeedChangeRate);
+                // accelerate or decelerate to target speed
+                if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+                    currentHorizontalSpeed > targetSpeed + speedOffset)
+                {
+                    // creates curved result rather than a linear one giving a more organic speed change
+                    // note T in Lerp is clamped, so we don't need to clamp our speed
+                    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                        Time.deltaTime * SpeedChangeRate);
 
-                // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                    // round speed to 3 decimal places
+                    _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                }
+
+                else
+                {
+                    _speed = targetSpeed;
+                }
+
+                _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+                if (_animationBlend < 0.01f) _animationBlend = 0f;
+
+                // normalise input direction
+                Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+                Vector2 input2dderection = new Vector2(0, 0); 
+                // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+                // if there is a move input rotate player when the player is moving
+                if (_input.move != Vector2.zero)
+                {
+					if (onCliff==true)
+					{
+                        _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+                    }
+					if (onCliff==false)
+					{
+                       _targetRotation=input2dderection.x ;
+					}
+                  
+                     
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                    // rotate to face input direction relative to camera position
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+
+
+                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+                // move the player
+                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+                // update animator if using character
+                if (_hasAnimator)
+                {
+                    _animator.SetFloat(_animIDSpeed, _animationBlend);
+                    _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+                }
             }
-			
-            else
-            {
-                _speed = targetSpeed;
-            }
-
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            if (_animationBlend < 0.01f) _animationBlend = 0f;
-
-            // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
-            {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
-
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }
-
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-            // update animator if using character
-            if (_hasAnimator)
-            {
-                _animator.SetFloat(_animIDSpeed, _animationBlend);
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-               
-            }
+          
         }
 
         private void JumpAndGravity()
         {
-            if (Grounded)
+            if (Grounded&&PlayerState!=1)
             {
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
@@ -443,7 +512,7 @@ namespace StarterAssets
 		}
 		void Reducrspeed()
 		{
-			if (PlayerState > 1)
+			if (PlayerState > 1&&iscold)
 			{
 				PlayerState--;
 
@@ -452,7 +521,7 @@ namespace StarterAssets
 		}
         public void heatconter()
         {
-			if (cold<10)
+			if (cold<10&&iscold)
 			{
                 cold++;
 
