@@ -1,0 +1,65 @@
+Man - Backpacker - Rigged 
+
+Important!
+1. There are 2 scenes in the project. Each of them is configured separately for a HDRP and URP.
+2. For correct rendering, in the Project Settings tab, you need to select in the Graphics item, the HDRenderPipelineAsset or Universal Render Pipeline Asset
+
+- PBR Materials (BaseColor, Roughness, Metallic, Normal)
+- All objects, textures and materials have their own names
+- Model is built to real-world scale
+- Units used: cm
+- Doesn't have Default names
+- Doesn't have NGons
+- Doesn't have Overlaping Vertices
+- Doesn't have Overlaping Faces
+- Doesn't have Overlaping UV Faces
+- Doesn't have Missing textures
+
+- Rigged:(Yes)
+- Rigged: to Humanoid:(Yes)
+- Morph: (No)
+- Animated:(no)
+- Cloth Simulation (no)
+- Number of Animations:(Demo)
+- Animation types (Root Motion/In-place):(No)
+
+Additional bones for Backpack
+backpack_top
+backpack_bottom
+strap_04
+strap_05
+strap_00
+strap_01
+strap_02
+strap_03
+strap_06
+strap_07
+strap_08
+strap_09
+strap_10
+strap_11
+strap_12
+strap_13
+
+Geometry with hair
+LOD 0
+- Polys: 100,915
+- Tris:  197,064
+- Verts: 121,448
+
+Geometry only hair
+LOD 0
+- Polys: 18,350
+- Tris:  36,700
+- Verts: 39,918
+
+Number of PBR Materials: 21
+Number of Textures: 65
+
+Texture Resolutions:
+- 4096x4096
+- 8192x8192 (Hair)
+
+Supported Development Platforms:
+-Windows:(Yes)
+-Mac:(Yes)
