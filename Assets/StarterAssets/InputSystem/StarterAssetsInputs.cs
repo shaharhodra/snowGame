@@ -10,6 +10,7 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
+		public Vector2 horizon;
 		public bool jump;
 		public bool sprint;
 
@@ -50,6 +51,10 @@ namespace StarterAssets
 		{
 			move = newMoveDirection;
 		} 
+		public void horizontalMove(Vector2 newMoveHorizontal)
+		{
+			horizon = newMoveHorizontal;
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
