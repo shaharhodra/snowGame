@@ -5,11 +5,7 @@ using UnityEngine.UI;
 
 public class GameManeger : MonoBehaviour
 {
-    
-   // StarterAssets.ThirdPersonController tpc;
-  //  [SerializeField] GameObject Player;
-   // int appelCount=0;
-    //public int coldCount=0;
+  
      GM gm;
 	StarterAssets.ThirdPersonController tpc;
 	[SerializeField] GameObject Player;
@@ -25,15 +21,7 @@ public class GameManeger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		//if (tpc.cold >= 10)
-		//{
-            
-		//	CancelInvoke("heatconter");
-		//}
-		//if (tpc.PlayerState==1)
-		//{
-  //          CancelInvoke("coldCounter");
-		//}
+		
 	}
 	
 	public void OnTriggerEnter(Collider other)
@@ -41,23 +29,13 @@ public class GameManeger : MonoBehaviour
         if (other.gameObject.CompareTag("appel"))
         {
             gm.apple();
-   //         appelCount++;
-			//if (tpc.PlayerState<=4&& appelCount==2)
-			//{
-   //             tpc.cold--;
-   //             tpc.PlayerState++;
-   //             appelCount = 0;
-   //         }
+ 
            
         }
 		if (other.gameObject.CompareTag("shack"))
 		{
 			gm.shack();
-			//tpc._animator.SetTrigger("warming");
-			//tpc.iscold = false;
-			//InvokeRepeating("heatconter", 0, 2);
-			
-			//InvokeRepeating("coldCounter", 0, 2);
+		
 		}
 
 
