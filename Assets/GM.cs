@@ -42,8 +42,7 @@ public class GM : MonoBehaviour
 		tpc.iscold = false;
 		InvokeRepeating("heatconter", 0, .5f);
 		tpc.MoveSpeed = 0f;
-		//stop moving bool
-		//tpc.move = false;
+		
 		InvokeRepeating("coldCounter", 0, 3);
 	}
 	public void GoOut()
