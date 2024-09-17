@@ -54,10 +54,11 @@ Material:
     - _EnableFogOnTransparent: 1
     - _Float: 15.3
     - _Float_1: 2.72
-    - _Heart_Density: 0.75
+    - _Heart_Density: 0.678
     - _Heart_Size: 2.91
     - _OpaqueCullMode: 2
     - _RenderQueueType: 1
+    - _Rotation_Speed: 1
     - _SrcBlend: 1
     - _Steep: 0.95
     - _Steepness: 1.5
