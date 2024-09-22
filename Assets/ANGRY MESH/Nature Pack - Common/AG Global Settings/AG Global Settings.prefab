@@ -31,12 +31,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064608244507912}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!33 &33516608409340872
 MeshFilter:
@@ -57,10 +58,12 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -85,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &114062693504424816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,11 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e2dd47bd03a4d241a979e691871be77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AOIntensity: 1
+  AOIntensity: 1.21
   EnableTintColor: 1
   TintNoiseTexture: {fileID: 2800000, guid: 7b354f28bd3e5db4a8dc7dd499578a2a, type: 3}
   TintNoiseTile: 1
-  TintNoiseContrast: 3
+  TintNoiseContrast: 0.7
 --- !u!114 &114383052167846030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,9 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e369dd80b4d5745a6efdfd4e2bc5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SnowTreeIntensity: 1
-  SnowTreeOffset: 1
-  SnowTreeContrast: 1
+  SnowTreeIntensity: 0.547
+  SnowTreeOffset: 0.966
+  SnowTreeContrast: 0.174
   SnowTreeArrowDirection: 1
 --- !u!114 &114579407425192878
 MonoBehaviour:
@@ -166,9 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e27cbb11d0094fae11a7ddaacfce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SnowGrassIntensity: 1
-  SnowGrassOffset: 0.8
-  SnowGrassContrast: 1
+  SnowGrassIntensity: 0.716
+  SnowGrassOffset: 0.469
+  SnowGrassContrast: 0.566
 --- !u!114 &-9219783190504121799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,5 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e36a98de59e50d64488fd3878ed58d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SnowMinimumHeight: -100
-  SnowFadeHeight: 1
+  SnowMinimumHeight: -30.65
+  SnowFadeHeight: 6.9

@@ -9,12 +9,12 @@ public class postProssControler : MonoBehaviour
     private DepthOfField DepthOfField;  // Reference to the DepthOfField effect
     private ChromaticAberration ChromaticAberration;//reference to the ChromaticAberration effect
     StarterAssets.ThirdPersonController tpc;
-    [SerializeField] GameObject player;
+    GameObject player;
     void Start()
     {
-    
-     
+        volume = GameObject.Find("Global Volume player").GetComponent<PostProcessVolume>();
 
+        player = GameObject.Find("PlayerArmature");
       
         tpc = player.GetComponent<StarterAssets.ThirdPersonController>();
         // Check if the volume has a Bloom effect and get a reference to it

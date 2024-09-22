@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class fallSnowTrigeer : MonoBehaviour
 {
-	[SerializeField] GameObject box;
+GameObject box;
 	
 	private void Start()
 	{
-		
+		box = GameObject.Find("fallSnow");
 	}
 	private void OnTriggerEnter(Collider other)
 	{

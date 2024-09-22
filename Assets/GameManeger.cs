@@ -8,12 +8,13 @@ public class GameManeger : MonoBehaviour
   
      GM gm;
 	StarterAssets.ThirdPersonController tpc;
-	[SerializeField] GameObject Player;
+	GameObject Player;
 
 
 	// Start is called before the first frame update
 	void Start()
     {
+		Player = GameObject.Find("PlayerArmature");
        tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
        gm= GameObject.FindObjectOfType<GM>();
     }
