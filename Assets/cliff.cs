@@ -5,11 +5,12 @@ using UnityEngine;
 public class cliff : MonoBehaviour
 {
 	StarterAssets.ThirdPersonController tpc;
-	[SerializeField] GameObject Player;
+	 GameObject Player;
 
 
 	private void Start()
 	{
+		Player = GameObject.Find("PlayerArmature");
 		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
 
 	}

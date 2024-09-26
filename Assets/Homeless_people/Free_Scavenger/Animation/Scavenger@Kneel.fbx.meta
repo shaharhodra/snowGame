@@ -36,8 +36,8 @@ ModelImporter:
       name: Kneel
       takeName: mixamo.com
       internalID: -203655887218126122
-      firstFrame: 129.1
-      lastFrame: 179.9
+      firstFrame: 92
+      lastFrame: 146
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

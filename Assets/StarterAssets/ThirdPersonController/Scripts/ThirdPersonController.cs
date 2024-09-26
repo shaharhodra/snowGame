@@ -80,8 +80,9 @@ namespace StarterAssets
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
         //energy
-        [SerializeField] Slider energy;
-       [SerializeField]  Slider coldSlider;
+        Slider energy;
+         Slider coldSlider;
+        Canvas canvas;
         public int cold;
         // player
         private float _speed;
@@ -141,8 +142,9 @@ namespace StarterAssets
 
         private void Start()
         {
-           // energy = GameObject.Find("energy").GetComponentInChildren<Slider>();
-           // coldSlider = GameObject.Find("cold").GetComponentInChildren<Slider>();
+            canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            energy =  canvas.transform.Find("energy").GetComponentInChildren<Slider>();
+            coldSlider = canvas.transform.Find("cold").GetComponentInChildren<Slider>();
             slde = false;
             onCliff = true;
             move = true;
@@ -150,9 +152,9 @@ namespace StarterAssets
             PlayerState = 1;
             cold = 10;
             //לשנות ל .. מרגע הנגיע 
-            InvokeRepeating("heatconter", 0f, 20);
+            InvokeRepeating("heatconter", 0f, 40);
             // reduc speed every x time
-            InvokeRepeating("Reducrspeed", 0f, 50);
+            InvokeRepeating("Reducrspeed", 0f, 70);
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -204,7 +206,7 @@ namespace StarterAssets
             {
 				if (slde==false)
 				{
-                    MoveSpeed = 1.2f;
+                    MoveSpeed = 2f;
                     JumpHeight = 1.2f;
                     Gravity = -15;
                     _animator.SetInteger(_animIdAnimationspeed, 1);
@@ -324,7 +326,8 @@ namespace StarterAssets
 			if (move)
 			{
                 // set target speed based on move speed, sprint speed and if sprint is pressed
-                float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+                // מחיקת הספרינט _input.sprint ? SprintSpeed :
+              float targetSpeed =  MoveSpeed;
 
                 // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
