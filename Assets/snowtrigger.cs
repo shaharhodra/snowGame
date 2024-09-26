@@ -5,9 +5,10 @@ using UnityEngine;
 public class snowtrigger : MonoBehaviour
 {
 	StarterAssets.ThirdPersonController tpc;
-	public GameObject Player;
+	GameObject Player;
 	private void Start()
 	{
+		Player = GameObject.Find("PlayerArmature");
 		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
 	}
 	private void Update()
@@ -24,16 +25,24 @@ public class snowtrigger : MonoBehaviour
 
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	//private void OnCollisionEnter(Collision collision)
+	//{
+	//	if (collision.gameObject.CompareTag("Player"))
+	//	{
+	//		InvokeRepeating("heatconter", 0, 1);
+	//		InvokeRepeating("Reducrspeed", 0, 7);
+	//	}
+
+	//}
+	private void OnTriggerEnter(Collider other)
 	{
-		if (collision.gameObject.CompareTag("Player"))
+		if (other.CompareTag("Player"))
 		{
 			InvokeRepeating("heatconter", 0, 1);
 			InvokeRepeating("Reducrspeed", 0, 7);
 		}
-
 	}
-	
+
 	void Reducrspeed()
 	{
 		if (tpc.PlayerState > 1)

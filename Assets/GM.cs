@@ -5,11 +5,12 @@ using UnityEngine;
 public class GM : MonoBehaviour
 {
 	StarterAssets.ThirdPersonController tpc;
-	[SerializeField] GameObject Player;
+     GameObject Player;
 	int appelCount = 0;
 	public int coldCount = 0;
 	private void Start()
 	{
+		Player = GameObject.Find("PlayerArmature");
 		tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
 
 	}
@@ -28,7 +29,7 @@ public class GM : MonoBehaviour
 	public void apple()
 	{
 		appelCount++;
-		if (tpc.PlayerState < 4 && appelCount == 2)
+		if (tpc.PlayerState < 4 && appelCount == 1)
 		{
 			tpc.cold--;
 			tpc.PlayerState++;

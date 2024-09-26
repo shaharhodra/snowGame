@@ -19,6 +19,7 @@ public class clif : MonoBehaviour
 		tpc = player.GetComponent<StarterAssets.ThirdPersonController>();
 
 	}
+	
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
