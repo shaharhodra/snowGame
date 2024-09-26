@@ -45,8 +45,6 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
-  - DecalMeshForwardEmissive
-  - DecalProjectorForwardEmissive
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -156,7 +154,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AffectAO: 0
     - _AffectAlbedo: 0
-    - _AffectEmission: 0
+    - _AffectEmission: 1
     - _AffectMetal: 0
     - _AffectNormal: 0
     - _AffectSmoothness: 1
@@ -245,7 +243,7 @@ Material:
     - _RefractionModel: 0
     - _Smoothness: 1
     - _SmoothnessRemapMax: 1
-    - _SmoothnessRemapMin: 0.7585006
+    - _SmoothnessRemapMin: 1
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
