@@ -13,7 +13,7 @@ public class camtregger : MonoBehaviour
 	public float moveSpeed = 5.0f;
 	public float jumpForce = 8.0f;
 	Rigidbody rb;
-	bool side;
+	public bool side;
 	private void Start()
 	{
 		side = false;
