@@ -2,96 +2,124 @@ using UnityEngine;
 
 public class KeyPressCounter : MonoBehaviour
 {
-    GameObject fire;
+    [SerializeField] GameObject fire;
     [SerializeField] int presscont;
     public float conter = 1.0f;
     GameObject steam;
     GameObject Steame;
     private float timer = 0f;
-   [SerializeField] private float decrementInterval = 5f; // 5 seconds interval
+    [SerializeField] private float decrementInterval = 5f; // 5 seconds interval
     GameObject Player;
     StarterAssets.ThirdPersonController tpc;
     bool fireOn;
-  //  GM gm;
-    // Start is called before the first frame update
+    bool activate;
+    bool activSet;
+
     void Start()
     {
-      //  gm = GameObject.Find("gameManeger").GetComponent<GM>();
+        // Initial setup
         Player = GameObject.Find("PlayerArmature");
         tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
         Steame = GameObject.Find("Steamer");
-        fire = GameObject.Find("fire");
         steam = GameObject.Find("Steam");
         Steame.SetActive(false);
-        fire.SetActive(false);
         steam.SetActive(false);
         fireOn = false;
-        // Initialization code if needed
+        activate = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-       
         // Increment when F is pressed
         if (Input.GetKeyDown(KeyCode.F))
         {
             tpc._animator.SetBool("blow", true);
             presscont++;
-            conter += 0.1f; // Example: increment 'conter' by 0.1f each time 'F' is pressed
+            conter += 0.1f; // Increment conter with each key press
         }
-		else
-		{
+        else
+        {
             tpc._animator.SetBool("blow", false);
-
         }
 
-
-        // Timer logic to decrement presscont every 5 seconds
+        // Decrement counter every decrementInterval seconds
         timer += Time.deltaTime;
         if (timer >= decrementInterval)
         {
-            if (presscont > 0) // Ensure presscont doesn't go below 0
+            if (presscont > 0)
             {
                 presscont--;
             }
-            timer = 0f; // Reset the timer after decrement
+            timer = 0f; // Reset timer
         }
-		if (presscont==20)
-		{
+
+        // Manage fire and steam based on press count
+        if (presscont == 20)
+        {
             fire.SetActive(true);
             Steame.SetActive(true);
+            activate = true;
+
+            // Start heat/cold counters
+            if (activSet && !IsInvoking("heatconter"))
+            {
+                InvokeRepeating("heatconter", 0, 2);
+                InvokeRepeating("coldCounter", 0, 10);
+            }
         }
-        if (presscont>5)
-		{
-            steam.SetActive(true);
 
-        }
-		else
-		{
-            steam.SetActive(false);
-
-        }
-	
-       
-
-
+        // Steam activation
+        steam.SetActive(presscont > 5);
     }
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.CompareTag("Player"))
-		{
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
             tpc._animator.SetBool("warming", true);
-		}
-	}
-	private void OnTriggerExit(Collider other)
-	{
+            activSet = true;
+
+            // Start the InvokeRepeating methods again when the player re-enters
+            if (activate && activSet)
+            {
+                // Cancel any ongoing invokes to avoid multiple calls stacking up
+                CancelInvoke("heatconter");
+                CancelInvoke("coldCounter");
+
+                // Start the invokes again
+                InvokeRepeating("heatconter", 0, 2);
+                InvokeRepeating("coldCounter", 0, 10);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
             tpc._animator.SetBool("warming", false);
+            activSet = false;
+
+            // Cancel the invoke methods when the player exits the trigger zone
+            CancelInvoke("heatconter");
+            CancelInvoke("coldCounter");
         }
     }
-   
-   
 
+
+    public void heatconter()
+    {
+        if (tpc.cold > 0)
+        {
+            tpc.cold--; // Decrease cold value over time
+        }
+    }
+
+    public void coldCounter()
+    {
+        if (tpc.PlayerState < 4)
+        {
+            tpc.PlayerState++; // Increase player state as cold builds up
+        }
+    }
 }
