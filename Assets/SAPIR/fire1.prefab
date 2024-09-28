@@ -167,6 +167,7 @@ MonoBehaviour:
   presscont: 0
   conter: 10
   decrementInterval: 0.3
+  blow: {fileID: 0}
 --- !u!65 &5717781286642619513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -186,8 +187,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0115051, y: 4.8200307, z: 2.6496582}
-  m_Center: {x: 109.665726, y: 3.6363533, z: 395.86646}
+  m_Size: {x: 1.8004303, y: 2.2893605, z: 1.8592224}
+  m_Center: {x: 109.674644, y: 2.3710182, z: 396.0252}
 --- !u!1 &1123479791265112413
 GameObject:
   m_ObjectHideFlags: 0
