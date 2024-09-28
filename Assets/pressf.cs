@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class KeyPressCounter : MonoBehaviour
 {
     [SerializeField] GameObject fire;
@@ -14,10 +13,11 @@ public class KeyPressCounter : MonoBehaviour
     bool fireOn;
     bool activate;
     bool activSet;
-
+   [SerializeField] GameObject blow;
     void Start()
     {
-        // Initial setup
+
+        //blow = GameObject.Find("press f");
         Player = GameObject.Find("PlayerArmature");
         tpc = Player.GetComponent<StarterAssets.ThirdPersonController>();
         Steame = GameObject.Find("Steamer");
@@ -26,6 +26,8 @@ public class KeyPressCounter : MonoBehaviour
         steam.SetActive(false);
         fireOn = false;
         activate = false;
+        blow.gameObject.SetActive(false);
+
     }
 
     void Update()
@@ -59,12 +61,14 @@ public class KeyPressCounter : MonoBehaviour
             fire.SetActive(true);
             Steame.SetActive(true);
             activate = true;
+            blow.gameObject.SetActive(false);
+
 
             // Start heat/cold counters
             if (activSet && !IsInvoking("heatconter"))
             {
                 InvokeRepeating("heatconter", 0, 2);
-                InvokeRepeating("coldCounter", 0, 10);
+                InvokeRepeating("coldCounter", 0, 2);
             }
         }
 
@@ -76,6 +80,7 @@ public class KeyPressCounter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            blow.gameObject.SetActive(true);
             tpc._animator.SetBool("warming", true);
             activSet = true;
 
@@ -88,7 +93,7 @@ public class KeyPressCounter : MonoBehaviour
 
                 // Start the invokes again
                 InvokeRepeating("heatconter", 0, 2);
-                InvokeRepeating("coldCounter", 0, 10);
+                InvokeRepeating("coldCounter", 0, 2);
             }
         }
     }
@@ -97,6 +102,7 @@ public class KeyPressCounter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            blow.gameObject.SetActive(false);
             tpc._animator.SetBool("warming", false);
             activSet = false;
 

@@ -24,7 +24,7 @@ public class shackarea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             tpc.PlayerState = 4;
-            tpc.cold = 5;
+           // tpc.cold = 5;
             tpc.reduse = false;
         }
     }
