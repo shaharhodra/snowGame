@@ -117,6 +117,7 @@ namespace StarterAssets
         public bool move;
         private bool _hasAnimator;
         public bool iscold ;
+       public bool reduse;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -142,6 +143,7 @@ namespace StarterAssets
 
         private void Start()
         {
+
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
             energy =  canvas.transform.Find("energy").GetComponentInChildren<Slider>();
             coldSlider = canvas.transform.Find("cold").GetComponentInChildren<Slider>();
@@ -149,12 +151,15 @@ namespace StarterAssets
             onCliff = true;
             move = true;
             iscold = true;
-            PlayerState = 1;
-            cold = 10;
-            //לשנות ל .. מרגע הנגיע 
-            InvokeRepeating("heatconter", 0f, 40);
-            // reduc speed every x time
-            InvokeRepeating("Reducrspeed", 0f, 70);
+            PlayerState = 4;
+            cold = 5;
+            reduse = true;
+			
+			
+                InvokeRepeating("heatconter", 0f, 40);
+                InvokeRepeating("Reducrspeed", 0f, 70);
+            
+          
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -515,7 +520,7 @@ namespace StarterAssets
 		}
 		void Reducrspeed()
 		{
-			if (PlayerState > 1&&iscold)
+			if (PlayerState > 1&&iscold&&reduse)
 			{
 				PlayerState--;
 
@@ -524,7 +529,7 @@ namespace StarterAssets
 		}
         public void heatconter()
         {
-			if (cold<10&&iscold)
+			if (cold<10&&iscold&&reduse)
 			{
                 cold++;
 
