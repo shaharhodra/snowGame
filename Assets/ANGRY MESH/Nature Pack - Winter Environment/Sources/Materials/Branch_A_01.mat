@@ -168,7 +168,7 @@ Material:
     - _BaseTreeAO: 0.5
     - _Bias: -0.37
     - _BlendMode: 0
-    - _BumpScale: 1
+    - _BumpScale: 0.817
     - _CamMax: 230.36
     - _CamMin: 0
     - _ChromaticAberration: 0.189
@@ -201,7 +201,7 @@ Material:
     - _Freq: 169.73
     - _GGG: 10.11
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.67
     - _GlossyReflections: 1
     - _Influence: 0
     - _Keyword0: 0
@@ -331,7 +331,7 @@ Material:
     - _ADS_GrassTintScaleOffset: {r: 0.001, g: 0.001, b: 3.94, a: 5.46}
     - _BackFaceColor: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 0.52735245, g: 0.55345905, b: 0.532682, a: 1}
+    - _Color: {r: 0.14758106, g: 0.51572317, b: 0.25276455, a: 1}
     - _Color0: {r: 1, g: 1, b: 1, a: 0}
     - _Color1: {r: 1, g: 0.5294118, b: 0.5294118, a: 0}
     - _DiffusionProfile_asset: {r: 8.828529e-15, g: -1.3423827e-26, b: 6.2575994e-23, a: 2.1953398e+11}
